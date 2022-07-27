@@ -3,7 +3,8 @@ from PyQt5.QtWidgets import*
 from PyQt5.QtCore import*
 from PyQt5.QtGui import*
 from clases import*
-from InterfazLogin import *
+from Interfaces.InterfazLogin import *
+from Validaciones.validaciones import *
 class MainApp2(QMainWindow):
     '''
     class MainApp2(QMainWindow):
@@ -136,27 +137,49 @@ class MainApp2(QMainWindow):
         Def registroInterfaz(self):
             Slot para registrar un nuevo usuario, obteniendo los datos de los campos de texto ingresados mediante la interfaz y almacennado en 
             una variable cada tipo de dato, al cual servirá pasarlo como parámetro al objeto usuarioNuevo
-        '''
-        usuario=self.cajaUsuario.text()
-        contraseña=self.cajaContraseña.text()
-        nombre=self.cajaNombre.text()
-        apellido=self.cajaApellido.text()
-        email=self.cajaEmail.text()
-        cedula=self.cajaCedula.text()
-        '''
-        Instanciamiento de la clase  Usuario, para crear un objeto de usuario de tipo Usuarios
-        Parametros:
-        -------------------------------
-            usuario: nombre de usuario
-            contraseña: contraseña del usuario
-            nombre: nombre del usuario
-            apellido: apellido del usuario
-            email: email del usuario
-            cedula: cedula del usuario            
-        '''
-        usuarioNuevo=Usuarios(usuario,contraseña, nombre, apellido, email, cedula)
-        documentoRegistro={"usuario":usuarioNuevo.usuario, "contraseña":usuarioNuevo.contraseña, "nombre":usuarioNuevo.nombre, "apellido":usuarioNuevo.apellido, "email":usuarioNuevo.email, "cedula":usuarioNuevo.cedula}
-        guardarEnColeccion(documentoRegistro)
-        print("===================================================")
-        print("Usuario Registrado Correctamente")
-        print("===================================================")
+        '''        
+        if validarCaracteres(self.cajaUsuario.text())==True:
+            usuario=self.cajaUsuario.text()                
+        else:
+            self.cajaUsuario.setText("Usuario no valido")
+            self.cajaUsuario.setStyleSheet("color:red")
+        if validarContraseña(self.cajaContraseña.text())==True:
+            contraseña=self.cajaContraseña.text()                
+        else:
+            self.cajaContraseña.setText("Contraseña no valida")
+            self.cajaContraseña.setStyleSheet("color:red")
+
+        if validarCaracteres(self.cajaNombre.text())==True:
+            nombre=self.cajaNombre.text()                    
+        else:
+            self.cajaNombre.setText("Nombre no valido")
+            self.cajaNombre.setStyleSheet("color:red")
+        
+        if validarCaracteres(self.cajaApellido.text())==True:
+            apellido=self.cajaApellido.text()
+        else:
+            self.cajaApellido.setText("Apellido no valido")
+            self.cajaApellido.setStyleSheet("color:red")
+
+        if validarEmail(self.cajaEmail.text())==True:
+            email=self.cajaEmail.text()
+        else:
+            self.cajaEmail.setText("Email no valido")
+            self.cajaEmail.setStyleSheet("color:red")
+        if validarNumero(self.cajaCedula.text())==True:
+            cedula=self.cajaCedula.text()
+        else:
+            self.cajaCedula.setText("Cedula no valida")
+            self.cajaCedula.setStyleSheet("color:red")
+
+
+           
+                
+                    
+                        
+                            
+
+
+
+            
+

@@ -1,7 +1,7 @@
 '''
 Librerías y módulos necesarios para ejecución del main y la interfaz de usuario
 '''
-from InterfazRegistro  import *
+from Interfaces.InterfazRegistro  import *
 from clases import *
 from PyQt5.QtWidgets import* 
 from PyQt5.QtCore import*
@@ -96,7 +96,7 @@ class MainApp3(QMainWindow):
         if Usuarios.inciar(usuario, contraseña)==True:
             pass
         elif Usuarios.inciar(usuario, contraseña)==False:
-            self.labelContraseñaIncorrecta.setText("C o n t r a s e ñ a  I n c o r r e c t a ")
+            self.labelContraseñaIncorrecta.setText("USUARIO  O  CONTRASEÑA  INCORRECTA")
             self.labelContraseñaIncorrecta.setGeometry(75,300, 250, 40)
             self.labelContraseñaIncorrecta.setAlignment(Qt.AlignCenter)
             self.labelContraseñaIncorrecta.setFont(QFont("Stencil", 10))
