@@ -1,11 +1,13 @@
 '''
 Librerías y módulos necesarios para ejecución del main y la interfaz de usuario
 '''
+from Interfaces.interfazCallCenter import *
 from Interfaces.InterfazRegistro import *
 from clases import *
 from PyQt5.QtWidgets import* 
 from PyQt5.QtCore import*
 from PyQt5.QtGui import*
+import sys
 class MainApp(QMainWindow):
     '''
     class MainApp(QMainWindow):
@@ -92,10 +94,10 @@ class MainApp(QMainWindow):
         '''
         usuario=self.cajaUsuario.text()
         contraseña=self.cajaContraseña.text()
-        Usuarios.inciar(usuario, contraseña) 
         if Usuarios.inciar(usuario, contraseña)==True:
-            pass
-        elif Usuarios.inciar(usuario, contraseña)==False:
+        #Abrir el ejecutable de la interfazCallCenter
+            pass           
+        else:
             self.labelContraseñaIncorrecta.setText("USUARIO  O  CONTRASEÑA  INCORRECTA")
             self.labelContraseñaIncorrecta.setGeometry(75,300, 250, 40)
             self.labelContraseñaIncorrecta.setAlignment(Qt.AlignCenter)

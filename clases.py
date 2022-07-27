@@ -1,4 +1,6 @@
+from Interfaces.interfazCallCenter import *
 from MongoDb.guardarEnMongo import * 
+import sys
 class Usuarios():
     '''
     class Usuarios():
@@ -41,11 +43,9 @@ class Usuarios():
         '''
         usuarios=retornarUsuarios()
         contrasenias=retornarContraseñas()
-        if usuario in usuarios and contrasenia in contrasenias:
-            print("------------------------------------------------------")
-            print("                    INICIO DE SESIÓN")
-            print("------------------------------------------------------")
-            print("Bienvenido", usuario)
-            print("------------------------------------------------------") 
+        if usuario in usuarios and contrasenia in contrasenias:            
+            print("Bienvenidp al sistema")
+            return True
         else:
+            print("Usuario o contraseña incorrectos")
             return False

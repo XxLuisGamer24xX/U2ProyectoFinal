@@ -3,8 +3,8 @@ import pymongo
 MONGO_HOST = "localhost"
 MONGO_PUERTO = "27017"
 MONGO_TIEMPO_FUERA=1000
-MONGO_NOMBREDB = "db_Farmacia"
-MONGO_NOMBRECOLECCION = "pruebaIngreso"
+MONGO_NOMBREDB = "sistemaDeEmergencia911"
+MONGO_NOMBRECOLECCION = "baseUsuarios"
 MONGO_URI = "mongodb://"+MONGO_HOST+":"+MONGO_PUERTO+"/"
 cliente = pymongo.MongoClient(MONGO_URI, serverSelectionTimeoutMS=MONGO_TIEMPO_FUERA)
 baseDatos = cliente[MONGO_NOMBREDB]
