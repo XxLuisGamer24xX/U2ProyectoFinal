@@ -1,12 +1,12 @@
 '''
 Librerías y módulos necesarios para ejecución del main y la interfaz de usuario
 '''
-from Interfaces.InterfazRegistro  import *
+from Interfaces.InterfazRegistro import *
 from clases import *
 from PyQt5.QtWidgets import* 
 from PyQt5.QtCore import*
 from PyQt5.QtGui import*
-class MainApp3(QMainWindow):
+class MainApp(QMainWindow):
     '''
     class MainApp(QMainWindow):
         clase MainApp, que hereda de QMainWindow almecenar todos los valores  de la ventana mediante funciones de la clase QmainWindow.
@@ -22,7 +22,7 @@ class MainApp3(QMainWindow):
         def __init__(self, parent=None, *args, **kwargs):
             Metodo construntor de la clase MainApp, que hereda de QMainWindow almecenar todos los valores  de la ventana mediante funciones de la clase QmainWindow.
         '''
-        super(MainApp3, self).__init__(parent=parent)
+        super(MainApp, self).__init__(parent=parent)
         self.setMinimumSize(400, 500)
         self.setMaximumSize(400,550)
         self.setWindowTitle('Login ')

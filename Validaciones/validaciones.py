@@ -18,7 +18,7 @@ def validarContraseña(contraseñaValidar):
     '''
     Funcion que valida que la contraseña sea segura con minimo 11 digitos
     '''
-    if (re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$", contraseñaValidar)and len(contraseñaValidar)>=11):
+    if (re.match("^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])[A-Za-z\d$@$!%*?&]{8,}$", contraseñaValidar)and len(contraseñaValidar)>=11 and len(contraseñaValidar)<=20):
         return True
     else:
         return False
@@ -26,7 +26,7 @@ def validarCaracteres(cadenaValidar):
     '''
     Funcion que valida que la cadena solo contenga letras
     '''
-    if re.match("^[a-zA-Z]*$", cadenaValidar)and len(cadenaValidar)>0:
+    if re.match("^[a-zA-Z]*$", cadenaValidar)and len(cadenaValidar)>0 and len(cadenaValidar)<=25:
         return True
     else:
         return False

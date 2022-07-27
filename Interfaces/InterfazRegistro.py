@@ -67,6 +67,11 @@ class MainApp2(QMainWindow):
         labelCedula.setAlignment(Qt.AlignCenter)
         labelCedula.setFont(QFont("Stencil", 10))
         labelCedula.setStyleSheet("color:black")
+
+        self.labelError=QLabel("", self)
+        self.labelError.setGeometry(0,235+75+75+75+37, width, 40)
+        self.labelError.setAlignment(Qt.AlignCenter)
+        self.labelError.setFont(QFont("Stencil", 10))
         #==========================Atributos de ingreso de Usuario==========================
         self.cajaUsuario=QLineEdit(self)
         self.cajaUsuario.setGeometry(60,85, 300, 30)
@@ -128,7 +133,7 @@ class MainApp2(QMainWindow):
             Slot para volver a la interfaz de login
         '''
         self.app= QApplication([])
-        self.windows=MainApp3()
+        self.windows=MainApp()
         self.windows.show()
         self.app.exec_()
         self.close()
@@ -137,40 +142,67 @@ class MainApp2(QMainWindow):
         Def registroInterfaz(self):
             Slot para registrar un nuevo usuario, obteniendo los datos de los campos de texto ingresados mediante la interfaz y almacennado en 
             una variable cada tipo de dato, al cual servirá pasarlo como parámetro al objeto usuarioNuevo
-        '''        
+
+        '''   
+        #==========================Validación de usuario==========================     
         if validarCaracteres(self.cajaUsuario.text())==True:
             usuario=self.cajaUsuario.text()                
         else:
             self.cajaUsuario.setText("Usuario no valido")
             self.cajaUsuario.setStyleSheet("color:red")
+        #==========================Validación de contraseña==========================     
         if validarContraseña(self.cajaContraseña.text())==True:
             contraseña=self.cajaContraseña.text()                
         else:
             self.cajaContraseña.setText("Contraseña no valida")
             self.cajaContraseña.setStyleSheet("color:red")
-
+        #==========================Validación del nombre==========================     
         if validarCaracteres(self.cajaNombre.text())==True:
             nombre=self.cajaNombre.text()                    
         else:
             self.cajaNombre.setText("Nombre no valido")
             self.cajaNombre.setStyleSheet("color:red")
-        
+        #==========================Validación del apellido==========================     
         if validarCaracteres(self.cajaApellido.text())==True:
             apellido=self.cajaApellido.text()
         else:
             self.cajaApellido.setText("Apellido no valido")
             self.cajaApellido.setStyleSheet("color:red")
-
+        #==========================Validación del Email==========================     
         if validarEmail(self.cajaEmail.text())==True:
             email=self.cajaEmail.text()
         else:
             self.cajaEmail.setText("Email no valido")
             self.cajaEmail.setStyleSheet("color:red")
+        #==========================Validación de la cédula==========================
         if validarNumero(self.cajaCedula.text())==True:
             cedula=self.cajaCedula.text()
         else:
             self.cajaCedula.setText("Cedula no valida")
             self.cajaCedula.setStyleSheet("color:red")
+        try:
+            '''
+            try:
+                Se intenta crear un objeto usuarioNuevo, con los datos ingresados en los campos de texto ya validados y guardarlos en la base de datos
+            except:
+                Si no se puede crear el objeto, se muestra un mensaje de error en la interfaz
+            '''
+            usuarioNuevo=Usuarios(usuario,contraseña,nombre,apellido,email,cedula)
+            documentoRegistro={"usuario":usuarioNuevo.usuario, "contraseña":usuarioNuevo.contraseña, "nombre":usuarioNuevo.nombre, "apellido":usuarioNuevo.apellido, "email":usuarioNuevo.email, "cedula":usuarioNuevo.cedula}
+            guardarEnColeccion(documentoRegistro)
+            self.labelError.setText("Se  ha  registrado  correctamente")
+            self.labelError.setGeometry(0,235+75+75+75+37, 400, 40)
+            self.labelError.setAlignment(Qt.AlignCenter)
+            self.labelError.setFont(QFont("Stencil", 10))
+            self.labelError.setStyleSheet("color:black")
+        except:
+            self.labelError.setText("No  se  ha  podido  registrar")
+            self.labelError.setGeometry(0,235+75+75+75+37, 400, 40)
+            self.labelError.setAlignment(Qt.AlignCenter)
+            self.labelError.setFont(QFont("Stencil", 10))
+            self.labelError.setStyleSheet("color:black")
+        
+        
 
 
            
