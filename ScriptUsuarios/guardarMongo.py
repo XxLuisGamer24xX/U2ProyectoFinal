@@ -18,6 +18,7 @@ def guardarUsuario(documento):
     -----------------
         documento: Tipo diccionario, que contiene los datos del usuario a guardar en la base de datos
     '''
+    
     try:
         '''
         try:

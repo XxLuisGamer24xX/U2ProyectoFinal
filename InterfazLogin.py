@@ -1,14 +1,11 @@
-'''
-Librerías y módulos necesarios para ejecución del main y la interfaz de usuario
-'''
-from Interfaces.interfazCallCenter import *
-from Interfaces.InterfazRegistro import *
 from clases import *
+from InterfazRegistro import *
 from PyQt5.QtWidgets import* 
 from PyQt5.QtCore import*
 from PyQt5.QtGui import*
+from PyQt5 import QtCore, QtGui, QtWidgets
 import sys
-class MainApp(QMainWindow):
+class VentanaLogin(QMainWindow):
     '''
     class MainApp(QMainWindow):
         clase MainApp, que hereda de QMainWindow almecenar todos los valores  de la ventana mediante funciones de la clase QmainWindow.
@@ -19,15 +16,16 @@ class MainApp(QMainWindow):
     def registrar(self):
         Metodo que me abre una nueva ventana de registro, y se encarga de registrar un nuevo usuario.
     '''
-    def __init__(self, parent=None, *args, **kwargs):
+    def __init__(self, parent=None):
         '''
         def __init__(self, parent=None, *args, **kwargs):
             Metodo construntor de la clase MainApp, que hereda de QMainWindow almecenar todos los valores  de la ventana mediante funciones de la clase QmainWindow.
         '''
-        super(MainApp, self).__init__(parent=parent)
+        super(VentanaLogin, self).__init__(parent=parent)
         self.setMinimumSize(400, 500)
         self.setMaximumSize(400,550)
         self.setWindowTitle('Login ')
+
         #========================= Atributos/priedades para el widget principal  =========================
         '''
         Creamos los laber("Mensajes por pantalla"), dentro de la clase MainApp.
@@ -71,6 +69,7 @@ class MainApp(QMainWindow):
         self.cajaContraseña.setEchoMode(QLineEdit.Password)
         self.cajaContraseña.setStyleSheet("border-radius:10px; border:1px solid #D1A5A5;")
         self.cajaContraseña.setToolTip("Ingrese constraseña")
+        self.close()
         #=========================Atributos para botón Iniciar Sesión==========================
         iniciarSesion=QPushButton("Iniciar Sesion", self)
         iniciarSesion.setGeometry(90,350, 220, 40)
@@ -87,7 +86,7 @@ class MainApp(QMainWindow):
         iniciarSesion.clicked.connect(self.iniciarSesion)
         registrarse.clicked.connect(self.registrar)
         #=========================Slots de las botones==========================
-    def iniciarSesion(self):
+    def iniciarSesion(self, *args, **kwargs):
         '''
         def iniciarSesion(self):
             Slot que se encarga de iniciar sesion, recibe el usuario y contraseña, y verifica si existe en la base de datos al precionar el botón inicar sesión.
@@ -95,17 +94,44 @@ class MainApp(QMainWindow):
         usuario=self.cajaUsuario.text()
         contraseña=self.cajaContraseña.text()
         if Usuarios.inciar(usuario, contraseña)==True:
-        #Abrir el ejecutable de la interfazCallCenter
-            pass           
+            from InterfazcallCenterAdmin import Ui_MenuCallCenter
+            import sys
+            print("Correcto")  
+            self.app = QtWidgets.QApplication(sys.argv)
+            self.MenuCallCenter = QtWidgets.QMainWindow()
+            self.ui =Ui_MenuCallCenter()
+            self.ui.setupUi(self.MenuCallCenter)
+            self.MenuCallCenter.show()
+            self.app.exec_()
+            self.close()    
         else:
             self.labelContraseñaIncorrecta.setText("USUARIO  O  CONTRASEÑA  INCORRECTA")
             self.labelContraseñaIncorrecta.setGeometry(75,300, 250, 40)
             self.labelContraseñaIncorrecta.setAlignment(Qt.AlignCenter)
             self.labelContraseñaIncorrecta.setFont(QFont("Stencil", 10))
             self.labelContraseñaIncorrecta.setStyleSheet("color:red")
+
     def registrar(self):
         self.app2= QApplication([])
-        self.windows=MainApp2()
-        self.windows.show()
+        self.windows2=ventanaRegistro()
+        self.windows2.show()
         self.app2.exec_()
         self.close()
+def irRegistro():
+    app2= QApplication([])
+    windows2=ventanaRegistro()
+    windows2.show()
+    app2.exec_()
+if __name__=="__main__":
+    '''
+    if __name__=="__main__":
+        Main del programa, se encarga de crear la ventana principal, y ejecutar la primera interfaz "Login".
+        El cual es la que se encarga de iniciar sesión o registrarse, para los administradores del callcenter.
+    '''
+    app= QApplication([])
+    window=VentanaLogin()
+    window.show()
+    app.exec_()
+    window.close()
+
+

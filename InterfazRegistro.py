@@ -3,9 +3,9 @@ from PyQt5.QtWidgets import*
 from PyQt5.QtCore import*
 from PyQt5.QtGui import*
 from clases import*
-from Interfaces.InterfazLogin import *
+from InterfazLogin import VentanaLogin
 from Validaciones.validaciones import *
-class MainApp2(QMainWindow):
+class ventanaRegistro(QMainWindow):
     '''
     class MainApp2(QMainWindow):
         clase MainApp2, que hereda de QMainWindow almecenar todos los valores  de la ventana mediante funciones de la clase QmainWindow.
@@ -16,7 +16,7 @@ class MainApp2(QMainWindow):
             Metodo construntor de la clase MainApp, que hereda de QMainWindow almecenar todos los valores  de la ventana mediante funciones de la clase QmainWindow.
         '''
         #========================= Atributosde del widget central =========================
-        super(MainApp2, self).__init__(parent=parent)
+        super(ventanaRegistro, self).__init__(parent=parent, *args, **kwargs, )
         self.setMinimumSize(400, 700)
         self.setMaximumSize(400,550)
         self.setWindowTitle('Registro de usuarios ')
@@ -126,17 +126,7 @@ class MainApp2(QMainWindow):
         registrarse.setStyleSheet("""QPushButton {background:#EC3333;color:#fff; border-radius:10px; }QPushButton:hover {background:#D90808; color:black;}""")
         #=========================Acciones de los botones==========================
         registrarse.clicked.connect(self.registroInterfaz)
-        iniciarSesion.clicked.connect(self.Volverlogin)
-    def Volverlogin(self):
-        '''
-        def Volverlogin(self):
-            Slot para volver a la interfaz de login
-        '''
-        self.app= QApplication([])
-        self.windows=MainApp()
-        self.windows.show()
-        self.app.exec_()
-        self.close()
+        iniciarSesion.clicked.connect(self.Volverlogin) 
     def registroInterfaz(self):
         '''
         Def registroInterfaz(self):
@@ -200,11 +190,27 @@ class MainApp2(QMainWindow):
             self.labelError.setGeometry(0,235+75+75+75+37, 400, 40)
             self.labelError.setAlignment(Qt.AlignCenter)
             self.labelError.setFont(QFont("Stencil", 10))
-            self.labelError.setStyleSheet("color:black")
+            self.labelError.setStyleSheet("color:black") 
+    def Volverlogin(self):
+        '''
+        def Volverlogin(self):
+            Slot para volver a la interfaz de login
+        '''
+        print("VOLVIÓ AL LOGIN")
+        self.app3= QApplication([])
+        self.window3=VentanaLogin()
+        self.window3.show()
+        self.app3.exec_()
+        self.close()
+       
         
-        
-
-
+        #Llamamos al main para volver a la interfaz de login          
+if __name__=="__main__":
+    '''
+    if __name__=="__main__":
+        Main del programa, se encarga de crear la ventana principal, y ejecutar la primera interfaz "Login".
+        El cual es la que se encarga de iniciar sesión o registrarse, para los administradores del callcenter.
+    '''
            
                 
                     
